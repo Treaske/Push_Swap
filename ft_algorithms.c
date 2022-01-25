@@ -12,7 +12,7 @@
 
 #include "push_swap.h"
 
-void	ft_three(t_strc_gen est)
+struct s_strc	ft_three(t_strc_gen est)
 {
 	if (est.a[1] == est.c[0])
 	{
@@ -36,6 +36,7 @@ void	ft_three(t_strc_gen est)
 		ft_swap_a(est);
 		ft_rrot_a(est);
 	}
+	return (est);
 }
 
 int	ft_check_lower(t_strc_gen est)
@@ -61,39 +62,15 @@ int	ft_get_count(t_strc_gen *est)
 
 	x = 0;
 	count = 0;
-	/* MOSTRAR LAS DOS LISTAS*/
-		x = 0;
-		while (x != est->longb)
-		{
-			printf(" \nb=%i= ", est->b[x]);
-			x++;
-		}
-		x = 0;
-		while (x != est->longa)
-		{
-			printf(" \na=%i= ", est->a[x]);
-			x++;
-		}
-	printf("\n  -- ENTRA A GET_COUNT---\n");
-	printf("\n  NUMERO AUXILIAR : %i\n", est->aux);
 	//if(est->b[count] != est->c[est->longc - est->aux])
 	//printf("\n  NUMERO DE B : %i\n", est->b[count]);
 	//printf("\n  NUMERO A BUSCAR  : %i\n", est->c[est->longc - est->aux]);
 
 	while (est->b[count] != est->c[est->longc - est->aux])
-	{
-		printf("\n  NUMERO AUXILIAR : %i\n", est->aux);
-		printf("\n  NUMERO a buscar : %i\n", est->c[est->longc - est->aux]);
-		printf("\n  -- ENTRA A GET_COUNT while---\n");
 		count++;
-		//getchar();
-	}
-	printf("\n  NUMERO cont : %i\n", est->b[count]);
-	printf("\n  NUMERO medio : %i\n", est->longb/2);
 	if (count < (est->longb/2))
 		return (1); 
 	//si es menos de la mitad de la longitud lo mejor es rot_b
-	printf("\n  -- SALE A GET_COUNT---\n");
 	return (2);
 }
 
@@ -106,7 +83,6 @@ struct s_strc	ft_one_hun(t_strc_gen est)
 	aux = 0;
 	while (est.longa != 2)
 	{
-		printf(" \nlargo de a: %i ", est.longa);
 		if (est.longa % 2 == 0)
 			aux += (est.longa / 2) - 1;
 		else
@@ -132,59 +108,57 @@ struct s_strc	ft_one_hun(t_strc_gen est)
 			est = ft_swap_a(est);
 	/* IR METIENDO UNO A UNO, OBSERVANDO SI SALE MEJOR HACER RRA O RA HASTA LLEGAR AL NUMERO*/
 	
-	/* MOSTRAR LAS DOS LISTAS*/
-		x = 0;
-		while (x != est.longb)
-		{
-			printf(" \nb=%i= ", est.b[x]);
-			x++;
-		}
-		x = 0;
-		while (x != est.longa)
-		{
-			printf(" \na=%i= ", est.a[x]);
-			x++;
-		}
-
 		
 	while (est.longa != est.longc)
 	{
-		printf("\n  --1 ENTRA A WHILE---\n");
 		if (ft_get_count(&est) == 1)
 		{
-			printf("\n  --1 ENTRA A IF---\n");
 			if (est.b[0] != est.c[est.longc - est.aux])
 			{
-				printf(" \nNUMERO a buscar =%i= ", est.c[est.longc - est.aux]);
-				printf(" \nNUMERO a buscar =%i= ", est.b[0]);
 				while (est.b[0] != est.c[est.longc - est.aux])
-				{
-					printf("\n  --2 a ENTRA A WHILEeeeee---\n");
 					est = ft_rot_b(est);
-				}
 			}
 		}
 		else
 		{
-			printf("\n  --2 ENTRA A IF---\n");
 			if (est.b[0] != est.c[est.longc - est.aux])
 			{
-				printf(" \nNUMERO a buscar =%i= ", est.c[est.longc - est.aux]);
-				printf(" \nNUMERO a buscar =%i= ", est.b[0]);
 				while (est.b[0] != est.c[est.longc - est.aux])
-				{
-					printf("\n  --2 b ENTRA A WHILE---\n");
 					est = ft_rrot_b(est);
-					printf(" \nNUMERO EST.B =%i= ", est.b[x]);
-					printf(" \nNUMERO DE EST.C=%i= ", est.c[est.longc - est.aux]);
-				}
 			}
 		}
-		printf("\n  --SALE WHILE---\n");
 		est.aux++;
 		est = ft_pass_b(est);
 		//getchar();
 	}
+	return (est);
+		
+}
+
+struct s_strc	ft_five_hun(t_strc_gen est)
+{
+	/*
+		1- pasar los numeros ordenados de c á a pero con numeros seguidos (para evitar negativos)
+		2- sacar la longitud en bytes  del numero mayor para saber las iteraciones a realizar
+		3- realizar bucle en cada cifra de binario que recorra todo a y pase a b los 0
+		4- devolver los de b á a y repetir 3-
+	*/
+
+	//reasignar los numeros
+	int	x;
+	int	j;
+
+	x = 0;
+	j = 1;
+
+	while (x != est.longc)
+	{
+		while (est.a[x] != est.c[j])
+			j++;
+		est.a[x] = j;
+		x++;
+	}
+
 	/* MOSTRAR LAS DOS LISTAS*/
 		x = 0;
 		while (x != est.longb)
@@ -198,7 +172,5 @@ struct s_strc	ft_one_hun(t_strc_gen est)
 			printf(" \na=%i= ", est.a[x]);
 			x++;
 		}
-		getchar();
 	return (est);
-		
 }

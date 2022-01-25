@@ -51,7 +51,8 @@ t_strc_gen	ft_rrot(t_strc_gen estruc);
 int	ft_get_less(t_strc_gen est, int *a);
 int	ft_get_max(t_strc_gen est, int *a);
 
-void ft_three(t_strc_gen est);
+t_strc_gen ft_three(t_strc_gen est);
 t_strc_gen ft_one_hun(t_strc_gen est);
+t_strc_gen ft_five_hun(t_strc_gen est);
 
 #endif

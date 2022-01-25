@@ -69,6 +69,7 @@ struct s_strc ft_make_c(t_strc_gen est)
 	
 	x = 0;
 	y = 1;
+	printf("\n1 llego\n");
 	est.c = malloc(sizeof(int) * est.longa);
 	while (x != est.longa)
 	{
@@ -97,6 +98,7 @@ struct s_strc ft_make_c(t_strc_gen est)
 			x++;
 		}
 	}
+	printf("\n2 llego\n");
 	return (est);
 }
 
@@ -120,6 +122,7 @@ int	main(int argc, char **argv)
 	est.count_mov = 0;
 	est.a = ft_get_number(est.longa, argv, &est);
 	est.longc = est.longa;
+	printf("\nllego\n");
 	if (est.error != 0)
 	{
 		printf("ERROR\n");
@@ -127,30 +130,33 @@ int	main(int argc, char **argv)
 	}
 	est = ft_make_c(est);
 	est.mid = est.c[est.longa/2];
+	printf("\n3 llego\n");
 	printf("    .%i.  ", est.mid);
-	/*while (x != est.longa)
-	{
-		printf("  ** %i **   ", est.c[x]);
-		printf("       ");
-		x++;
-	}*/
 	if (est.error != 0)
 	{
 		printf("ERROR\n");
 		return (0);
 	}
-	/*while (x != est.longa)
+	printf("\n4 llego\n");
+	if (est.longa <= 3)
 	{
-		printf(" - %i- ", est.a[x]);
-		printf("       ");
-		x++;
-	}*/
-	if (est.longa == 3)
-		ft_three(est);
-	else
+		printf("\n3 o menos\n");
+		est = ft_three(est);
+	}
+		
+	else if (est.longa <= 100)
 	{
+		printf("\n100 o menos\n");
 		est = ft_one_hun(est);
 	}
+		
+	else
+	{
+		printf("ERROR\n");
+		est = ft_five_hun(est);
+		
+	}
+		
 		
 	x = 0;
 	while (x != est.longa)
