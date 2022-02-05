@@ -103,7 +103,8 @@ struct s_strc	ft_pass_b(t_strc_gen est)
 
 	x = 1;
 	est.longa++;
-	est.longb--;
+	if (est.longb > 0)
+		est.longb--;
 	printf("====pa====\n");
 	auxa = malloc (sizeof(int) * (est.longa));
 	auxb = malloc (sizeof(int) * (est.longb));
@@ -137,55 +138,35 @@ struct s_strc	ft_pass_b(t_strc_gen est)
 struct s_strc	ft_rot_a(t_strc_gen estruc)
 {
 	int	aux;
-	int	num;
 	int	x;
 
 	printf("====ra====\n");
-	num = estruc.longa;
 	x = 0;
 	aux = estruc.a[0];
-	while (x < estruc.longa)
+	while (x != (estruc.longa - 1))
 	{
 		estruc.a[x] = estruc.a[x + 1];
 		x++;
 	}
-	estruc.a[num - 1] = aux;
+	estruc.a[x] = aux;
 	estruc.count_mov++;
-
-	
-	/* MOSTRAR LAS DOS LISTAS*/
-		x = 0;
-		while (x != estruc.longb)
-		{
-			printf(" \nb=%i= ", estruc.b[x]);
-			x++;
-		}
-		x = 0;
-		while (x != estruc.longa)
-		{
-			printf(" \na=%i= ", estruc.a[x]);
-			x++;
-		}
 	return (estruc);
 }
 
 struct s_strc	ft_rot_b(t_strc_gen estruc)
 {
 	int	aux;
-	int	num;
 	int	x;
 
-	num = estruc.longb;
+	printf("====ra====\n");
 	x = 0;
-	printf("====rot====\n");
 	aux = estruc.b[0];
-	estruc.b[num] = aux;
-	while(x != num)
+	while (x != (estruc.longb - 1))
 	{
-		aux = estruc.b[x];
 		estruc.b[x] = estruc.b[x + 1];
 		x++;
 	}
+	estruc.b[x] = aux;
 	estruc.count_mov++;
 	return (estruc);
 }
@@ -204,44 +185,66 @@ struct s_strc	ft_rot(t_strc_gen estruc)
 struct s_strc	ft_rrot_a(t_strc_gen estruc)
 {
 	int	aux;
-	int	num;
-	int aux2;
 	int	x;
-
-	num = estruc.longa;
+	
+	x = estruc.longa - 2;
 	printf("====rrot A====\n");
-	x = 0;
-	aux2 = estruc.a[num-1];
-	while(num != x)
+	aux = estruc.a[estruc.longa - 1];
+	while (x > (1-2))
 	{
-		aux = estruc.a[num];
-		estruc.a[num] =  estruc.a[num - 1];
-		num--;
+		estruc.a[x + 1] = estruc.a[x];
+		x--;
 	}
-	estruc.a[0] = aux2;
+	estruc.a[0] = aux;
 	estruc.count_mov++;
+
+	/* MOSTRAR LAS DOS LISTAS*/
+	/*	x = 0;
+		while (x != estruc.longb)
+		{
+			printf(" \nb=%i= ", estruc.b[x]);
+			x++;
+		}
+		x = 0;
+		while (x != estruc.longa)
+		{
+			printf(" \na=%i= ", estruc.a[x]);
+			x++;
+		}
+	*/	
 	return (estruc);
 }
 
 struct s_strc	ft_rrot_b(t_strc_gen estruc)
 {
 	int	aux;
-	int aux2;
-	int	num;
 	int	x;
-
-	num = estruc.longb;
-	x = 0;
+	
+	x = estruc.longb - 2;
 	printf("====rrot B====\n");
-	aux2 = estruc.b[num-1];
-	while (num != x)
+	aux = estruc.b[estruc.longb - 1];
+	while (x > (1-2))
 	{
-		aux = estruc.b[num];
-		estruc.b[num] = estruc.b[num - 1];
-		num--;
+		estruc.b[x + 1] = estruc.b[x];
+		x--;
 	}
-	estruc.b[0] = aux2;
+	estruc.b[0] = aux;
 	estruc.count_mov++;
+
+	/* MOSTRAR LAS DOS LISTAS*/
+		/*x = 0;
+		while (x != estruc.longb)
+		{
+			printf(" \nb=%i= ", estruc.b[x]);
+			x++;
+		}
+		x = 0;
+		while (x != estruc.longa)
+		{
+			printf(" \na=%i= ", estruc.a[x]);
+			x++;
+		}
+		*/
 	return (estruc);
 }
 

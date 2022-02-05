@@ -168,8 +168,8 @@ int	main(int argc, char **argv)
 	printf(" \nNUMERO DE MOVIMIENTOS- %i- \n", est.count_mov);
 	return (0);
 }
-
-/*int	main(void)
+/*
+int	main(void)
 {
 	int			x;
 	t_strc_gen	estruc;
@@ -205,4 +205,5 @@ int	main(int argc, char **argv)
 		x++;
 	}
 	return (0);
-}*/
+}
+*/
