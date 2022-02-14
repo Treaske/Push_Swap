@@ -6,204 +6,100 @@
 /*   By: ade-blas <ade-blas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 18:47:48 by ade-blas          #+#    #+#             */
-/*   Updated: 2022/01/24 18:05:54 by ade-blas         ###   ########.fr       */
+/*   Updated: 2022/02/14 17:41:37 by ade-blas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	ft_atoi(const char *str, t_strc_gen *est)
+int	ft_get_long_args(int argc, char **argv)
 {
-	int	num;
-	int	sign;
 	int	cont;
+	int	x;
 
-	num = 0;
-	sign = 1;
+	x = 1;
 	cont = 0;
-	if (*str == '-' || *str == '+')
+	while (x != argc)
 	{
-		if (*str == '-')
-			sign = -1;
-		str++;
-	}
-	while (str[cont] >= '0' && str[cont] <= '9' && str[cont] != 0)
-	{
-		num = (num * 10) + (str[cont] - 48);
-		cont++;
-	}
-	if (str[cont] != 0 || num < -2147483648 || num > 2147483647)
-	{
-		est->error = 1;
-		return (0);
-	}
-	return (num * sign);
-}
-
-int *ft_get_number(int len, char **argv, t_strc_gen *est)
-{
-	int	*a;
-	int aux;
-	int	x;
-
-	aux = 0;
-	x = 0;
-	a = malloc(sizeof(int) * len);
-	while (x != len)
-	{
-		aux = ft_atoi(argv[x + 1], est);
-		if (est->error != 0)
-			return (0);
-		a[x] = aux;
-		printf(" <%i> ", a[x]);
+		if (ft_count_arg(argv[x]) == 1)
+			cont++;
+		else
+			cont += ft_count_arg(argv[x]);
 		x++;
 	}
-	return (a);
+	return (cont);
 }
 
-struct s_strc ft_make_c(t_strc_gen est)
-{
-	int	x;
-	int	aux;
-	int	y;
-	
-	x = 0;
-	y = 1;
-	printf("\n1 llego\n");
-	est.c = malloc(sizeof(int) * est.longa);
-	while (x != est.longa)
-	{
-		est.c[x] = est.a[x];
-		x++;
-	}
-	while (y != est.longa)
-	{
-		x = 0;
-		y = 1;
-		while (x + 1 != est.longa)
-		{
-			if (est.c[x] == est.c[x + 1])
-			{
-				est.error = 2;
-				return (est);
-			}
-			if (est.c[x] > est.c[x + 1])
-			{
-				aux = est.c[x];
-				est.c[x] = est.c[x + 1];
-				est.c[x + 1] = aux;	
-			}
-			else 
-				y++;
-			x++;
-		}
-	}
-	printf("\n2 llego\n");
-	return (est);
-}
-
-/*void ft_clean_max(t_strc_gen est)
-{
-	//free(est.a);
-	//free(est.b);
-	//free(est.c);
-}*/
-
-int	main(int argc, char **argv)
+static struct s_strc	ft_inicialize(int argc, char **argv)
 {
 	t_strc_gen	est;
-	int			x;
 
-	x = 0;
-	est.longa = argc - 1;
+	est.longa = ft_get_long_args(argc, argv);
 	est.longb = 0;
 	est.error = 0;
 	est.aux = 3;
 	est.count_mov = 0;
 	est.a = ft_get_number(est.longa, argv, &est);
 	est.longc = est.longa;
-	printf("\nllego\n");
+	return (est);
+}
+
+int	ft_check_error(t_strc_gen est, int argc, int x, int y)
+{
+	if (argc == 1)
+		return (0);
 	if (est.error != 0)
 	{
-		printf("ERROR\n");
-		return (0);
+		write(1, "Error\n", 7);
+		return (1);
 	}
-	est = ft_make_c(est);
-	est.mid = est.c[est.longa/2];
-	printf("\n3 llego\n");
-	printf("    .%i.  ", est.mid);
+	est = ft_make_c(est, x, y);
 	if (est.error != 0)
 	{
-		printf("ERROR\n");
-		return (0);
+		write(1, "Error\n", 7);
+		return (1);
 	}
-	printf("\n4 llego\n");
+	while (x != est.longc)
+	{
+		if (est.a[x] == est.c[x])
+			y++;
+		x++;
+	}
+	if (y == est.longc)
+		return (1);
+	return (0);
+}
+
+void	leaks(void)
+{
+	system("leaks -q a.out");
+}
+
+int	main(int argc, char **argv)
+{
+	t_strc_gen	est;
+	int			x;
+	int			y;
+
+	x = 0;
+	y = 0;
+	
+	est = ft_inicialize(argc, argv);
+	if (ft_check_error(est, argc, x, y) != 0)
+		return (0);
+	est.mid = est.c[est.longa / 2];
 	if (est.longa <= 3)
-	{
-		printf("\n3 o menos\n");
 		est = ft_three(est);
-	}
-		
 	else if (est.longa <= 100)
-	{
-		printf("\n100 o menos\n");
 		est = ft_one_hun(est);
-	}
-		
 	else
 	{
-		printf("ERROR\n");
+		printf("\n\nhola\n\n");
 		est = ft_five_hun(est);
-		
 	}
 		
-		
-	x = 0;
-	while (x != est.longa)
-	{
-		printf(" - %i- ", est.a[x]);
-		x++;
-	}
-	//ft_clean_max(est);
-	printf(" \nNUMERO DE MOVIMIENTOS- %i- \n", est.count_mov);
+	free(est.a);
+	free(est.c);
+	atexit(leaks);
 	return (0);
 }
-/*
-int	main(void)
-{
-	int			x;
-	t_strc_gen	estruc;
-	x = 0;
-	estruc.a = malloc (sizeof(int) * 6);
-	estruc.b = malloc (sizeof(int) * 6);
-	estruc.longa = 5;
-	estruc.longb = 5;
-	while (x != 5)
-	{
-		estruc.a[x] = x;
-		estruc.b[x] = (x + 10);
-		x++;
-	}
-	x = 0;
-	while (x < 5)
-	{
-		printf(" <%i> ", estruc.a[x]);
-		printf(" - %i - ", estruc.b[x]);
-		x++;
-	}
-	estruc = ft_pass_b(estruc);
-	x = 0;
-	while (x < 4)
-	{
-		printf(" - %i- ", estruc.a[x]);
-		x++;
-	}
-	x = 0;
-	while (x < 6)
-	{
-		printf(" <%i> ", estruc.b[x]);
-		x++;
-	}
-	return (0);
-}
-*/

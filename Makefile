@@ -6,12 +6,12 @@
 #    By: ade-blas <ade-blas@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/14 18:33:50 by ade-blas          #+#    #+#              #
-#    Updated: 2022/01/18 18:02:56 by ade-blas         ###   ########.fr        #
+#    Updated: 2022/02/14 17:44:37 by ade-blas         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC		= gcc
-CFLAGS	= -Wall -Werror -Wextra -fsanitize=address -g3
+CFLAGS	= -Wall -Werror -Wextra 
 LIB1	= ar -rcs
 LIB2	= ranlib
 RM		= /bin/rm -f
@@ -19,7 +19,7 @@ RM		= /bin/rm -f
 NAME	= push_swap.a
 
 INCLUDE	= push_swap.h
-SRCS	= push_swap.c ft_instructions.c ft_algorithms.c
+SRCS	= push_swap.c ft_instructions.c ft_instructions2.c ft_instructions3.c ft_algorithms_fivehun.c ft_algorithms_hundred.c ft_algorithms_three.c ft_get_number.c ft_make_a.c ft_make_c.c
 
 OBJS	= $(SRCS:.c=.o)
 
