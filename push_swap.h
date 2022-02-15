@@ -6,7 +6,7 @@
 /*   By: ade-blas <ade-blas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 17:11:07 by ade-blas          #+#    #+#             */
-/*   Updated: 2022/02/14 17:58:28 by ade-blas         ###   ########.fr       */
+/*   Updated: 2022/01/24 18:07:20 by ade-blas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,24 +61,19 @@ t_strc_gen	ft_rrot_a(t_strc_gen estruc);
 t_strc_gen	ft_rrot_b(t_strc_gen estruc);
 t_strc_gen	ft_rrot(t_strc_gen estruc);
 
-int			ft_check_lower(t_strc_gen est);
-int			ft_get_count(t_strc_gen *est);
 int			ft_get_less(t_strc_gen est, int *a);
 int			ft_get_max(t_strc_gen est, int *a);
-int			*ft_make_auxa(int x, int longa, int *auxa, int *a);
-int			*ft_make_auxb(int longb, int *auxb, int *b);
-int			*ft_get_number(int longa, char **argv, t_strc_gen *est);
 int			*ft_split(char *s, t_strc_gen est);
 int			get_word(char *s, t_strc_gen *est);
 int			ft_len(char *s);
 int			ft_count_arg(char *argv);
 int			ft_atoi(const char *str, t_strc_gen *est);
+int			*ft_get_number(int longa, char **argv, t_strc_gen *est);
 
 t_num_gen	ft_make_split(t_num_gen s_num, t_strc_gen est, char **argv);
 t_num_gen	ft_inizialice(t_strc_gen *est, int longa);
 
-t_strc_gen	ft_make_c(t_strc_gen est, int x, int y);
-t_strc_gen	ft_make_c_aux(t_strc_gen est, int x, int y, int aux);
+t_strc_gen	ft_make_c(t_strc_gen est, int y);
 t_strc_gen	ft_three(t_strc_gen est);
 t_strc_gen	ft_one_hun(t_strc_gen est);
 t_strc_gen	ft_one_huntwo(t_strc_gen est);

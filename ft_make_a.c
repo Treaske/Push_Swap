@@ -61,6 +61,7 @@ int	ft_count_arg(char *argv)
 				x++;
 		}
 	}
+	printf("\n\n num = %i \n\n", num);
 	return (num);
 }
 
@@ -82,6 +83,7 @@ int	get_word(char *s, t_strc_gen *est)
 
 	x = 0;
 	wlen = ft_len(s);
+	printf("\n\n wlen = %i \n\n", wlen);
 	aux = malloc(sizeof(char) * wlen + 1);
 	if (!aux)
 		return (0);

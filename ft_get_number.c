@@ -23,7 +23,7 @@ struct s_num	ft_inizialice(t_strc_gen *est, int longa)
 	s_num.y = 0;
 	s_num.a = malloc(sizeof(int) * longa);
 	if (!s_num.a)
-		est->error = 1;
+		est->error = 3;
 	return (s_num);
 }
 
@@ -32,7 +32,7 @@ struct s_num	ft_make_split(t_num_gen s_num, t_strc_gen est, char **argv)
 	s_num.auxy = malloc(sizeof(int) * (s_num.countw));
 	s_num.auxy = ft_split(argv[s_num.z + 1], est);
 	s_num.y = 0;
-	s_num.countw = ft_count_arg(argv[s_num.z + 1]) + s_num.x;
+	s_num.countw = s_num.countw + s_num.x;
 	while (s_num.x != s_num.countw)
 	{
 		s_num.a[s_num.x] = s_num.auxy[s_num.y];
@@ -54,8 +54,8 @@ int	*ft_get_number(int longa, char **argv, t_strc_gen *est)
 		if (est->error != 0)
 			return (0);
 		s_num.num = ft_count_arg(argv[s_num.z + 1]);
-		if (s_num.num < 0)
-			est->error = 1;
+		if (s_num.num == 0)
+			est->error = 4;
 		else if (s_num.num == 1)
 			s_num.a[s_num.x] = ft_atoi(argv[s_num.z + 1], est);
 		else

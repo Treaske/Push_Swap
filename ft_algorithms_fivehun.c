@@ -21,17 +21,14 @@ struct s_strc	ft_five_hun(t_strc_gen est)
 	i = 0;
 	y = 0;
 	j = 0;
- 
 	while (y != est.longc)
-	{   
-        printf("\n\na\n\n");
+	{
 		j = 0;
 		while (est.a[y] != est.c[j])
 			j++;
 		est.a[y] = j;
 		y++;
 	}
-    
 	while ((est.c[est.longc - 1] >> i) != 0)
 		i++;
 	est = ft_five_huntwo(est, i);

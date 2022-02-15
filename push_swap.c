@@ -6,7 +6,7 @@
 /*   By: ade-blas <ade-blas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 18:47:48 by ade-blas          #+#    #+#             */
-/*   Updated: 2022/02/14 17:41:37 by ade-blas         ###   ########.fr       */
+/*   Updated: 2022/01/24 18:05:54 by ade-blas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,13 +50,8 @@ int	ft_check_error(t_strc_gen est, int argc, int x, int y)
 		return (0);
 	if (est.error != 0)
 	{
-		write(1, "Error\n", 7);
-		return (1);
-	}
-	est = ft_make_c(est, x, y);
-	if (est.error != 0)
-	{
-		write(1, "Error\n", 7);
+		printf("\n\n %i", est.error);
+		write(1, "Error1\n", 7);
 		return (1);
 	}
 	while (x != est.longc)
@@ -70,11 +65,11 @@ int	ft_check_error(t_strc_gen est, int argc, int x, int y)
 	return (0);
 }
 
-void	leaks(void)
+/*void	leaks(void)
 {
 	system("leaks -q a.out");
 }
-
+*/
 int	main(int argc, char **argv)
 {
 	t_strc_gen	est;
@@ -83,23 +78,28 @@ int	main(int argc, char **argv)
 
 	x = 0;
 	y = 0;
-	
 	est = ft_inicialize(argc, argv);
+	est = ft_make_c(est, y);
 	if (ft_check_error(est, argc, x, y) != 0)
 		return (0);
+	x = 0;
+	while (x != est.longa)
+		x++;
 	est.mid = est.c[est.longa / 2];
 	if (est.longa <= 3)
 		est = ft_three(est);
 	else if (est.longa <= 100)
 		est = ft_one_hun(est);
 	else
-	{
-		printf("\n\nhola\n\n");
 		est = ft_five_hun(est);
+	x = 0;
+	while (x != est.longa)
+	{
+		printf(" - %i- ", est.a[x]);
+		x++;
 	}
-		
 	free(est.a);
 	free(est.c);
-	atexit(leaks);
+	//atexit(leaks);
 	return (0);
 }
