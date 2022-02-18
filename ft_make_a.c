@@ -21,7 +21,7 @@ int	ft_atoi(const char *str, t_strc_gen *est)
 	num = 0;
 	sign = 1;
 	cont = 0;
-	if (*str == '-' || *str == '+')
+	while (*str == '-' || *str == '+')
 	{
 		if (*str == '-')
 			sign = -1;
@@ -40,28 +40,29 @@ int	ft_atoi(const char *str, t_strc_gen *est)
 	return (num * sign);
 }
 
-int	ft_count_arg(char *argv)
+int	ft_count_arg(char *str)
 {
 	int	num;
 	int	x;
 
 	num = 0;
 	x = 0;
-	while (argv[x] != '\0')
+	while (str[x] != 0)
 	{
-		if (argv[x] != ' ')
+		if (str[x] >= '0' && str[x] <= '9')
 		{
+			while (str[x] >= '0' && str[x] <= '9')
+				x++;
 			num++;
-			while (argv[x] != ' ' && argv[x] != '\0')
-				x++;
 		}
-		else if (argv[x] == ' ')
+		else if (str[x] == ' ' || str[x] == '+' || str[x] == '-')
 		{
-			while (argv[x] == ' ')
+			while (str[x] == ' ' || str[x] == '+' || str[x] == '-')
 				x++;
 		}
+		else
+			return (0);
 	}
-	printf("\n\n num = %i \n\n", num);
 	return (num);
 }
 
@@ -83,7 +84,6 @@ int	get_word(char *s, t_strc_gen *est)
 
 	x = 0;
 	wlen = ft_len(s);
-	printf("\n\n wlen = %i \n\n", wlen);
 	aux = malloc(sizeof(char) * wlen + 1);
 	if (!aux)
 		return (0);
@@ -104,11 +104,15 @@ int	*ft_split(char *s, t_strc_gen est)
 	int	*aux;
 	int	x;
 	int	countw;
+	int	c;
 
 	x = 0;
+	c = 1;
 	if (!s)
 		return (NULL);
 	countw = ft_count_arg(s);
+	if (countw == 0)
+		return (0);
 	aux = malloc(sizeof(int) * (countw));
 	if (!aux)
 		return (NULL);

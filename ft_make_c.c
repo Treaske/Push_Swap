@@ -36,23 +36,28 @@ struct s_strc	ft_make_c_aux(t_strc_gen est, int x, int y, int aux)
 			x++;
 		}
 	}
+	//printf("hola\n");
 	return (est);
 }
 
-struct s_strc	ft_make_c(t_strc_gen est, int y)
+struct s_strc	ft_make_c(t_strc_gen est)
 {
 	int	aux;
 	int	x;
+	int	y;
 
 	x = 0;
 	aux = 0;
 	y = 1;
+	
 	est.c = malloc(sizeof(int) * est.longa);
+	
 	while (x != est.longa)
 	{
 		est.c[x] = est.a[x];
 		x++;
 	}
+	
 	est = ft_make_c_aux(est, x, y, aux);
 	return (est);
 }

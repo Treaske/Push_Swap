@@ -73,7 +73,7 @@ int			*ft_get_number(int longa, char **argv, t_strc_gen *est);
 t_num_gen	ft_make_split(t_num_gen s_num, t_strc_gen est, char **argv);
 t_num_gen	ft_inizialice(t_strc_gen *est, int longa);
 
-t_strc_gen	ft_make_c(t_strc_gen est, int y);
+t_strc_gen	ft_make_c(t_strc_gen est);
 t_strc_gen	ft_three(t_strc_gen est);
 t_strc_gen	ft_one_hun(t_strc_gen est);
 t_strc_gen	ft_one_huntwo(t_strc_gen est);
