@@ -19,7 +19,9 @@ RM		= /bin/rm -f
 NAME	= push_swap
 
 INCLUDE	= push_swap.h
-SRCS	= push_swap.c ft_make_c.c ft_make_a.c ft_get_number.c ft_instructions.c ft_instructions2.c ft_instructions3.c ft_algorithms_fivehun.c ft_algorithms_hundred.c ft_algorithms_three.c
+SRCS	= push_swap.c ft_make_c.c ft_make_a.c ft_get_number.c ft_instructions.c \
+			ft_instructions2.c ft_instructions3.c ft_algorithms_fivehun.c \
+			ft_algorithms_hundred.c ft_algorithms_three.c handle_algorithms.c
 
 OBJS	= $(SRCS:.c=.o)
 

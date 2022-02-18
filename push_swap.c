@@ -6,7 +6,7 @@
 /*   By: ade-blas <ade-blas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 18:47:48 by ade-blas          #+#    #+#             */
-/*   Updated: 2022/01/24 18:05:54 by ade-blas         ###   ########.fr       */
+/*   Updated: 2022/02/18 19:13:57 by ade-blas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,23 @@ static struct s_strc	ft_inicialize(int argc, char **argv)
 	est.aux = 3;
 	est.count_mov = 0;
 	est.a = ft_get_number(est.longa, argv, &est);
-	//atexit(leaks);
 	est.longc = est.longa;
 	return (est);
+}
+
+int handle_error(int flg, t_strc_gen est)
+{
+	if (flg == 0)
+	{
+		write(1, "Error\n", 6);
+	}
+	else
+	{
+		free(est.a);
+		if (est.c)
+			free(est.c);
+	}
+	return (1);
 }
 
 int	ft_check_error(t_strc_gen est, int argc)
@@ -63,18 +77,14 @@ int	ft_check_error(t_strc_gen est, int argc)
 
 	x = 0;
 	y = 0;
-	if (argc == 1)
-		return (1);
-	if (est.longa)
+	if (argc == 1 || est.longa == 1 || est.longa == 0)
 	{
-		free(est.a);
+		if (est.longa == 1)
+			free(est.a);
 		return (1);
 	}
 	if (est.error != 0)
-	{
-		write(1, "Error\n", 6);
-		return (1);
-	}
+		return (handle_error(0, est));
 	while (x != est.longa)
 	{
 		if (est.a[x] == est.c[x])
@@ -82,20 +92,20 @@ int	ft_check_error(t_strc_gen est, int argc)
 		x++;
 	}
 	if (y == est.longa)
-		return (1);
+		return (handle_error(1, est));
 	return (0);
 }
 
-
+void to_be_free(t_strc_gen est)
+{
+	free(est.a);
+	free(est.c);
+}
 
 int	main(int argc, char **argv)
 {
 	t_strc_gen	est;
-	int			x;
-	int			y;
 
-	x = 0;
-	y = 0;
 	if (argc == 1)
 		return (0);
 	est = ft_inicialize(argc, argv);
@@ -110,23 +120,8 @@ int	main(int argc, char **argv)
 		atexit(leaks);
 		return (0);
 	}
-	while (x != est.longa)
-		x++;
-	est.mid = est.c[est.longa / 2];
-	if (est.longa <= 3)
-		est = ft_three(est);
-	else if (est.longa <= 100)
-		est = ft_one_hun(est);
-	else
-		est = ft_five_hun(est);
-	/*x = 0;
-	while (x != est.longa)
-	{
-		printf(" - %i- ", est.a[x]);
-		x++;
-	}*/
-	free(est.a);
-	free(est.c);
+	handle_swaps(est);
+	to_be_free(est);
 	atexit(leaks);
 	return (0);
 }

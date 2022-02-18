@@ -6,7 +6,7 @@
 /*   By: ade-blas <ade-blas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 17:11:07 by ade-blas          #+#    #+#             */
-/*   Updated: 2022/01/24 18:07:20 by ade-blas         ###   ########.fr       */
+/*   Updated: 2022/02/18 19:13:48 by ade-blas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,4 +79,6 @@ t_strc_gen	ft_one_hun(t_strc_gen est);
 t_strc_gen	ft_one_huntwo(t_strc_gen est);
 t_strc_gen	ft_five_hun(t_strc_gen est);
 t_strc_gen	ft_five_huntwo(t_strc_gen est, int i);
+
+struct s_strc handle_swaps(t_strc_gen est);
 #endif

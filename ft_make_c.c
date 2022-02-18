@@ -36,7 +36,6 @@ struct s_strc	ft_make_c_aux(t_strc_gen est, int x, int y, int aux)
 			x++;
 		}
 	}
-	//printf("hola\n");
 	return (est);
 }
 

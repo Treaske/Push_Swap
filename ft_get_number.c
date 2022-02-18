@@ -53,20 +53,14 @@ int	*ft_get_number(int longa, char **argv, t_strc_gen *est)
 	t_num_gen	s_num;
 
 	s_num = ft_inizialice_a(est, longa);
-	printf("estamos dentro pa");
-	getchar();
 	while (s_num.x != longa)
 	{
-		printf("entro pa");
-		getchar();
 		if (argv[s_num.z][0] == 0)
 		{
 			while (argv[s_num.z][0] == 0 && argv[s_num.z])
 				s_num.z++;
 			if (!argv[s_num.z])
 				return (s_num.a);
-			printf("dentro del iterado omartine---> %s", argv[s_num.z]);
-			getchar();
 		}
 		if (est->error != 0)
 			return (0);
@@ -82,7 +76,5 @@ int	*ft_get_number(int longa, char **argv, t_strc_gen *est)
 		s_num.x++;
 		s_num.z++;
 	}
-	printf("sale pa");
-	getchar();
 	return (s_num.a);
 }
