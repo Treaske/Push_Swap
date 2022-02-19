@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_make_a.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ade-blas <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ade-blas <ade-blas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 20:27:49 by ade-blas          #+#    #+#             */
-/*   Updated: 2022/02/14 17:57:50 by ade-blas         ###   ########.fr       */
+/*   Updated: 2022/02/19 17:08:41 by ade-blas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,7 @@ int	*ft_split(char *s, t_strc_gen est)
 	if (!s)
 		return (NULL);
 	countw = ft_count_arg(s);
+	printf("countW = %i\n", countw);
 	if (countw == 0)
 		return (0);
 	aux = malloc(sizeof(int) * (countw));

@@ -6,7 +6,7 @@
 /*   By: ade-blas <ade-blas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 18:47:48 by ade-blas          #+#    #+#             */
-/*   Updated: 2022/02/18 19:13:57 by ade-blas         ###   ########.fr       */
+/*   Updated: 2022/02/19 16:42:34 by ade-blas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,12 +79,18 @@ int	ft_check_error(t_strc_gen est, int argc)
 	y = 0;
 	if (argc == 1 || est.longa == 1 || est.longa == 0)
 	{
+		printf("me meto 1\n\n");
 		if (est.longa == 1)
 			free(est.a);
 		return (1);
 	}
 	if (est.error != 0)
+	{
+		printf("me meto 2\n\n");
 		return (handle_error(0, est));
+	}
+	if(!est.c)
+		return (0);	
 	while (x != est.longa)
 	{
 		if (est.a[x] == est.c[x])
@@ -92,36 +98,43 @@ int	ft_check_error(t_strc_gen est, int argc)
 		x++;
 	}
 	if (y == est.longa)
+	{
+		printf("me meto 4\n\n");
 		return (handle_error(1, est));
+	}
+		
 	return (0);
-}
-
-void to_be_free(t_strc_gen est)
-{
-	free(est.a);
-	free(est.c);
 }
 
 int	main(int argc, char **argv)
 {
 	t_strc_gen	est;
+	int			x;
+	int			y;
 
-	if (argc == 1)
-		return (0);
+	x = 0;
+	y = 0;
 	est = ft_inicialize(argc, argv);
-	if (ft_check_error(est, argc) != 0)
-	{
-		atexit(leaks);
-		return (0);
-	}
 	est = ft_make_c(est);
 	if (ft_check_error(est, argc) != 0)
-	{
-		atexit(leaks);
 		return (0);
+	while (x != est.longa)
+		x++;
+	est.mid = est.c[est.longa / 2];
+	if (est.longa <= 3)
+		est = ft_three(est);
+	else if (est.longa <= 100)
+		est = ft_one_hun(est);
+	else
+		est = ft_five_hun(est);
+	x = 0;
+	while (x != est.longa)
+	{
+		printf(" - %i- ", est.a[x]);
+		x++;
 	}
-	handle_swaps(est);
-	to_be_free(est);
-	atexit(leaks);
+	free(est.a);
+	free(est.c);
+	//atexit(leaks);
 	return (0);
 }

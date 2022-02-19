@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_get_number.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ade-blas <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ade-blas <ade-blas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 20:43:36 by ade-blas          #+#    #+#             */
-/*   Updated: 2022/02/14 17:55:26 by ade-blas         ###   ########.fr       */
+/*   Updated: 2022/02/19 17:49:39 by ade-blas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ struct s_num	ft_inizialice_a(t_strc_gen *est, int longa)
 	s_num.x = 0;
 	s_num.z = 1;
 	s_num.y = 0;
+	printf("\n longa = %i\n", longa);
 	s_num.a = malloc(sizeof(int) * longa);
 	if (!s_num.a)
 		est->error = 3;
@@ -55,24 +56,31 @@ int	*ft_get_number(int longa, char **argv, t_strc_gen *est)
 	s_num = ft_inizialice_a(est, longa);
 	while (s_num.x != longa)
 	{
+		
 		if (argv[s_num.z][0] == 0)
 		{
-			while (argv[s_num.z][0] == 0 && argv[s_num.z])
+			printf("entro en 0 arg\n");
+			while ((argv[s_num.z][0] == 0) && argv[s_num.z])
 				s_num.z++;
 			if (!argv[s_num.z])
 				return (s_num.a);
 		}
+		s_num.num = ft_count_arg(argv[s_num.z]);
 		if (est->error != 0)
 			return (0);
-		s_num.num = ft_count_arg(argv[s_num.z]);
+		printf("num = %i\n", s_num.num);
 		if (s_num.num == 1)
+		{
+			printf("entro en 1 arg\n");
 			s_num.a[s_num.x] = ft_atoi(argv[s_num.z], est);
+		}
 		else
 		{
-            s_num.x = s_num.x + s_num.num - 1;
+			printf("entro en mas arg\n");
+			// if (argv[s_num.z][0] == ' ' && argv[s_num.z][0] == 0)
 			s_num = ft_make_split(s_num, *est, argv);
+			s_num.x = s_num.x + s_num.num - 1;
 		}
-		
 		s_num.x++;
 		s_num.z++;
 	}
