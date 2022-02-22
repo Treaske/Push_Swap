@@ -6,13 +6,13 @@
 /*   By: ade-blas <ade-blas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 18:50:41 by ade-blas          #+#    #+#             */
-/*   Updated: 2022/02/19 16:13:44 by ade-blas         ###   ########.fr       */
+/*   Updated: 2022/02/21 18:38:08 by ade-blas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	*ft_make_auxa(int x, int longa, int *auxa, int *a)
+long	*ft_make_auxa(int x, int longa, long *auxa, long *a)
 {
 	while (x != (longa))
 	{
@@ -22,7 +22,7 @@ int	*ft_make_auxa(int x, int longa, int *auxa, int *a)
 	return (auxa);
 }
 
-int	*ft_make_auxb(int longb, int *auxb, int *b)
+long	*ft_make_auxb(int longb, long *auxb, long *b)
 {
 	int	x;
 
@@ -38,18 +38,18 @@ int	*ft_make_auxb(int longb, int *auxb, int *b)
 struct s_strc	ft_pass_b(t_strc_gen est)
 {
 	int	x;
-	int	*auxa;
-	int	*auxb;
+	long	*auxa;
+	long	*auxb;
 
 	x = 1;
 	est.longa++;
 	if (est.longb > 0)
 		est.longb--;
 	write(1, "pa\n", 3);
-	auxa = malloc (sizeof(int) * (est.longa));
+	auxa = malloc (sizeof(long) * (est.longa));
 	auxb = NULL;
 	if (est.longb != 0)
-		auxb = malloc (sizeof(int) * (est.longb));
+		auxb = malloc (sizeof(long) * (est.longb));
 	auxa[0] = est.b[0];
 	if (est.longa != 1)
 		auxa = ft_make_auxa(x, est.longa, auxa, est.a);
@@ -66,17 +66,17 @@ struct s_strc	ft_pass_b(t_strc_gen est)
 struct s_strc	ft_pass_a(t_strc_gen est)
 {
 	int	x;
-	int	*auxa;
-	int	*auxb;
+	long	*auxa;
+	long	*auxb;
 
 	x = 1;
 	est.longb++;
 	est.longa--;
 	write(1, "pb\n", 3);
-	auxa = malloc (sizeof(int) * (est.longa));
-	auxb = malloc (sizeof(int) * (est.longb));
+	auxa = malloc (sizeof(long) * (est.longa));
+	auxb = malloc (sizeof(long) * (est.longb));
 	if (est.longb == 1)
-			est.b = malloc(sizeof(int) * 1);
+			est.b = malloc(sizeof(long) * 1);
 	auxb[0] = est.a[0];
 	if (est.longb != 1)
 		auxb = ft_make_auxa(x, est.longb, auxb, est.b);

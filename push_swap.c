@@ -6,7 +6,7 @@
 /*   By: ade-blas <ade-blas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 18:47:48 by ade-blas          #+#    #+#             */
-/*   Updated: 2022/02/19 16:42:34 by ade-blas         ###   ########.fr       */
+/*   Updated: 2022/02/22 17:04:20 by ade-blas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,22 @@ void	leaks(void)
 	system("leaks -q push_swap");
 }
 
+int ft_check_lowmax(t_strc_gen est)
+{
+	int	x;
+	int	y;
+	
+	x = 0;
+	y = 0;
+	while (x != est.longa)
+	{
+		if (est.a[x] <= -2147483648 || est.a[x] >= 2147483647)
+			y++;
+	x++;
+	}
+	return (y);
+}
+
 static struct s_strc	ft_inicialize(int argc, char **argv)
 {
 	t_strc_gen	est;
@@ -60,7 +76,9 @@ int handle_error(int flg, t_strc_gen est)
 	if (flg == 0)
 	{
 		write(1, "Error\n", 6);
+		printf("%i\n", est.error);
 	}
+	
 	else
 	{
 		free(est.a);
@@ -79,14 +97,12 @@ int	ft_check_error(t_strc_gen est, int argc)
 	y = 0;
 	if (argc == 1 || est.longa == 1 || est.longa == 0)
 	{
-		printf("me meto 1\n\n");
 		if (est.longa == 1)
 			free(est.a);
 		return (1);
 	}
 	if (est.error != 0)
 	{
-		printf("me meto 2\n\n");
 		return (handle_error(0, est));
 	}
 	if(!est.c)
@@ -99,7 +115,6 @@ int	ft_check_error(t_strc_gen est, int argc)
 	}
 	if (y == est.longa)
 	{
-		printf("me meto 4\n\n");
 		return (handle_error(1, est));
 	}
 		
@@ -114,10 +129,22 @@ int	main(int argc, char **argv)
 
 	x = 0;
 	y = 0;
+	if (argc == 1)
+		return (0);
 	est = ft_inicialize(argc, argv);
+	if (ft_check_error(est, argc) != 0)
+	{
+		//atexit(leaks);
+		return (0);
+	}
+		
 	est = ft_make_c(est);
 	if (ft_check_error(est, argc) != 0)
+	{
+		//atexit(leaks);
 		return (0);
+	}
+		
 	while (x != est.longa)
 		x++;
 	est.mid = est.c[est.longa / 2];
@@ -130,9 +157,10 @@ int	main(int argc, char **argv)
 	x = 0;
 	while (x != est.longa)
 	{
-		printf(" - %i- ", est.a[x]);
+		printf(" - %li- ", est.a[x]);
 		x++;
 	}
+	x = 0;
 	free(est.a);
 	free(est.c);
 	//atexit(leaks);

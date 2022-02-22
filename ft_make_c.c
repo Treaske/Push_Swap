@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_make_c.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ade-blas <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ade-blas <ade-blas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 19:52:25 by ade-blas          #+#    #+#             */
-/*   Updated: 2022/02/14 17:38:01 by ade-blas         ###   ########.fr       */
+/*   Updated: 2022/02/21 19:28:54 by ade-blas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,15 +48,13 @@ struct s_strc	ft_make_c(t_strc_gen est)
 	x = 0;
 	aux = 0;
 	y = 1;
-	
-	est.c = malloc(sizeof(int) * est.longa);
-	
+
+	est.c = malloc(sizeof(long) * est.longa);
 	while (x != est.longa)
 	{
 		est.c[x] = est.a[x];
 		x++;
 	}
-	
 	est = ft_make_c_aux(est, x, y, aux);
 	return (est);
 }

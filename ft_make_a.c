@@ -6,7 +6,7 @@
 /*   By: ade-blas <ade-blas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 20:27:49 by ade-blas          #+#    #+#             */
-/*   Updated: 2022/02/19 17:08:41 by ade-blas         ###   ########.fr       */
+/*   Updated: 2022/02/21 19:28:32 by ade-blas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	ft_atoi(const char *str, t_strc_gen *est)
 {
-	int	num;
+	long	num;
 	int	sign;
 	int	cont;
 
@@ -32,7 +32,7 @@ int	ft_atoi(const char *str, t_strc_gen *est)
 		num = (num * 10) + (str[cont] - 48);
 		cont++;
 	}
-	if (str[cont] != 0 || num < -2147483648 || num > 2147483647)
+	if (num < -2147483648 || num > 2147483647)
 	{
 		est->error = 1;
 		return (0);
@@ -111,7 +111,6 @@ int	*ft_split(char *s, t_strc_gen est)
 	if (!s)
 		return (NULL);
 	countw = ft_count_arg(s);
-	printf("countW = %i\n", countw);
 	if (countw == 0)
 		return (0);
 	aux = malloc(sizeof(int) * (countw));

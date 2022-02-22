@@ -1,6 +1,6 @@
 # **************************************************************************** #
 #                                                                              #
-#                                                         :::      ::::::::    #
+#    -fsanitize=address -g3                                                     :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
 #    By: ade-blas <ade-blas@student.42.fr>          +#+  +:+       +#+         #
@@ -11,7 +11,7 @@
 # **************************************************************************** #
 
 CC		= gcc
-CFLAGS	= -Wall -Werror -Wextra  -fsanitize=address -g3
+CFLAGS	= -Wall -Werror -Wextra  
 LIB1	= ar -rcs
 LIB2	= ranlib
 RM		= /bin/rm -f
