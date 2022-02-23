@@ -6,7 +6,7 @@
 /*   By: ade-blas <ade-blas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 18:50:41 by ade-blas          #+#    #+#             */
-/*   Updated: 2022/02/21 18:38:08 by ade-blas         ###   ########.fr       */
+/*   Updated: 2022/02/23 19:49:46 by ade-blas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ long	*ft_make_auxb(int longb, long *auxb, long *b)
 
 struct s_strc	ft_pass_b(t_strc_gen est)
 {
-	int	x;
+	int		x;
 	long	*auxa;
 	long	*auxb;
 
@@ -65,7 +65,7 @@ struct s_strc	ft_pass_b(t_strc_gen est)
 
 struct s_strc	ft_pass_a(t_strc_gen est)
 {
-	int	x;
+	int		x;
 	long	*auxa;
 	long	*auxb;
 

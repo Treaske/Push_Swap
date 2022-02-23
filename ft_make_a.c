@@ -6,7 +6,7 @@
 /*   By: ade-blas <ade-blas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 20:27:49 by ade-blas          #+#    #+#             */
-/*   Updated: 2022/02/21 19:28:32 by ade-blas         ###   ########.fr       */
+/*   Updated: 2022/02/23 19:04:27 by ade-blas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 int	ft_atoi(const char *str, t_strc_gen *est)
 {
 	long	num;
-	int	sign;
-	int	cont;
+	int		sign;
+	int		cont;
 
 	num = 0;
 	sign = 1;
@@ -27,16 +27,15 @@ int	ft_atoi(const char *str, t_strc_gen *est)
 			sign = -1;
 		str++;
 	}
-	while (str[cont] >= '0' && str[cont] <= '9' && str[cont] != 0)
+	while (str[cont] >= '0' && str[cont] <= '9')
 	{
 		num = (num * 10) + (str[cont] - 48);
 		cont++;
 	}
-	if (num < -2147483648 || num > 2147483647)
-	{
+	if (cont >= 11)
 		est->error = 1;
-		return (0);
-	}
+	if (str[cont] != 0 || num <= -2147483648 || num >= 2147483647)
+		est->error = 1;
 	return (num * sign);
 }
 
@@ -84,6 +83,8 @@ int	get_word(char *s, t_strc_gen *est)
 
 	x = 0;
 	wlen = ft_len(s);
+	if (wlen >= 11)
+		est->error = 9;
 	aux = malloc(sizeof(char) * wlen + 1);
 	if (!aux)
 		return (0);
@@ -104,10 +105,8 @@ int	*ft_split(char *s, t_strc_gen est)
 	int	*aux;
 	int	x;
 	int	countw;
-	int	c;
 
 	x = 0;
-	c = 1;
 	if (!s)
 		return (NULL);
 	countw = ft_count_arg(s);
@@ -121,10 +120,11 @@ int	*ft_split(char *s, t_strc_gen est)
 		while (*s == ' ' && *s != '\0')
 			s++;
 		aux[x] = get_word(s, &est);
+		if (est.error != 0)
+			return (0);
 		while (*s != ' ' && *s != '\0')
 			s++;
 		x++;
 	}
-	x = 0;
 	return (aux);
 }

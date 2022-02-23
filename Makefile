@@ -1,17 +1,17 @@
 # **************************************************************************** #
 #                                                                              #
-#    -fsanitize=address -g3                                                     :::      ::::::::    #
+#                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
 #    By: ade-blas <ade-blas@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/14 18:33:50 by ade-blas          #+#    #+#              #
-#    Updated: 2022/02/19 16:38:50 by ade-blas         ###   ########.fr        #
+#    Updated: 2022/02/23 19:56:56 by ade-blas         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC		= gcc
-CFLAGS	= -Wall -Werror -Wextra  
+CFLAGS	= -Wall -Werror -Wextra -fsanitize=address -g
 LIB1	= ar -rcs
 LIB2	= ranlib
 RM		= /bin/rm -f
@@ -21,7 +21,7 @@ NAME	= push_swap
 INCLUDE	= push_swap.h
 SRCS	= push_swap.c ft_make_c.c ft_make_a.c ft_get_number.c ft_instructions.c \
 			ft_instructions2.c ft_instructions3.c ft_algorithms_fivehun.c \
-			ft_algorithms_hundred.c ft_algorithms_three.c
+			ft_algorithms_hundred.c ft_algorithms_three.c ft_auxiliar.c
 
 OBJS	= $(SRCS:.c=.o)
 

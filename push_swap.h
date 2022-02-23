@@ -6,7 +6,7 @@
 /*   By: ade-blas <ade-blas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 17:11:07 by ade-blas          #+#    #+#             */
-/*   Updated: 2022/02/21 18:43:52 by ade-blas         ###   ########.fr       */
+/*   Updated: 2022/02/23 18:58:41 by ade-blas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,13 +36,13 @@ typedef struct s_strc
 typedef struct s_num
 {
 	long	*a;
-	int	num;
-	int	aux;
-	int	*auxy;
-	int	x;
-	int	y;
-	int	z;
-	int	countw;
+	int		num;
+	int		aux;
+	int		*auxy;
+	int		x;
+	int		y;
+	int		z;
+	int		countw;
 
 }	t_num_gen;
 
@@ -61,6 +61,8 @@ t_strc_gen	ft_rrot_a(t_strc_gen estruc);
 t_strc_gen	ft_rrot_b(t_strc_gen estruc);
 t_strc_gen	ft_rrot(t_strc_gen estruc);
 
+int			handle_error(int flg, t_strc_gen est);
+int			ft_check_letters(char **argv, int argc);
 int			ft_check_error(t_strc_gen est, int argc);
 int			ft_get_less(t_strc_gen est, int *a);
 int			ft_get_max(t_strc_gen est, int *a);
@@ -69,7 +71,7 @@ int			get_word(char *s, t_strc_gen *est);
 int			ft_len(char *s);
 int			ft_count_arg(char *argv);
 int			ft_atoi(const char *str, t_strc_gen *est);
-long			*ft_get_number(int longa, char **argv, t_strc_gen *est);
+long		*ft_get_number(int longa, char **argv, t_strc_gen *est);
 
 t_num_gen	ft_make_split(t_num_gen s_num, t_strc_gen est, char **argv);
 t_num_gen	ft_inizialice(t_strc_gen *est, int longa);
@@ -81,5 +83,4 @@ t_strc_gen	ft_one_huntwo(t_strc_gen est);
 t_strc_gen	ft_five_hun(t_strc_gen est);
 t_strc_gen	ft_five_huntwo(t_strc_gen est, int i);
 
-struct s_strc handle_swaps(t_strc_gen est);
 #endif
